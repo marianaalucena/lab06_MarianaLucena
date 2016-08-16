@@ -1,11 +1,12 @@
 package lab6_MarianaLucena;
 
 public class Jogo {
-	private String nome;
-	private double preco;
-	private int maiorScore;
-	private int qntJogadas;
-	private int qntConclusoes;
+	protected String nome;
+	protected double preco;
+	protected int maiorScore;
+	protected int qntJogadas;
+	protected int qntConclusoes;
+	protected SetList
 	
 	public Jogo(String nome, double preco) throws Exception {
 		if (nome == null || nome.trim().equals("")){
@@ -25,7 +26,13 @@ public class Jogo {
 	}
 	
 	public void registraJogadas(int score, boolean zerou){
+		if (score > maiorScore){
+			setMaiorScore(score);
+		}
 		
+		if (zerou){
+			setQntJogadas();
+		}
 	}
 
 	public String getNome() {
@@ -56,16 +63,16 @@ public class Jogo {
 		return qntJogadas;
 	}
 
-	public void setQntJogadas(int qntJogadas) {
-		this.qntJogadas = qntJogadas;
+	public void setQntJogadas() {
+		this.qntJogadas += 1;
 	}
 
 	public int getQntConclusoes() {
 		return qntConclusoes;
 	}
 
-	public void setQntConclusoes(int qntConclusoes) {
-		this.qntConclusoes = qntConclusoes;
+	public void setQntConclusoes() {
+		this.qntConclusoes += 1;
 	}
 	
 
