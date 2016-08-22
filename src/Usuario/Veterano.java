@@ -14,9 +14,10 @@ public class Veterano extends Usuario {
 		double descontoVeterano = 0.2;
 		int x2pPorReal = 15;
 		if (!jogos.contains(jogo)) {
-			if (getSaldo() >= jogo.getPreco()) {
+			double valorJogo = jogo.getPreco() * descontoVeterano;
+			if (getSaldo() >= valorJogo) {
 				jogos.add(jogo);
-				compraJogo(jogo.getPreco() * descontoVeterano);
+				compraJogo(valorJogo);
 				double precoInteiro = jogo.getPreco() - (jogo.getPreco() % 1);
 				x2p += precoInteiro * x2pPorReal;
 				return true;
@@ -31,9 +32,10 @@ public class Veterano extends Usuario {
 		double descontoVeterano = 0.2;
 		int x2pPorReal = 15;
 		if (!jogos.contains(jogo)) {
-			if (getSaldo() >= jogo.getPreco()) {
+			double valorJogo = jogo.getPreco() * descontoVeterano;
+			if (getSaldo() >= valorJogo) {
 				jogos.add(jogo);
-				compraJogo(jogo.getPreco() * descontoVeterano);
+				compraJogo(valorJogo);
 				double precoInteiro = jogo.getPreco() - (jogo.getPreco() % 1);
 				x2p += precoInteiro * x2pPorReal;
 				return true;

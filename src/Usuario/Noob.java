@@ -15,9 +15,10 @@ public class Noob extends Usuario {
 		double descontoNoob = 0.1;
 		int x2pPorReal = 10;
 		if (!jogos.contains(jogo)) {
-			if (getSaldo() >= jogo.getPreco()) {
+			double valorJogo = jogo.getPreco() * descontoNoob;
+			if (getSaldo() >= valorJogo) {
 				jogos.add(jogo);
-				compraJogo(jogo.getPreco() * descontoNoob);
+				compraJogo(valorJogo);
 				double precoInteiro = jogo.getPreco() - (jogo.getPreco() % 1);
 				x2p += precoInteiro * x2pPorReal;
 				return true;
@@ -32,9 +33,10 @@ public class Noob extends Usuario {
 		int x2pPorReal = 10;
 		Jogo jogo = factoryJogo.factoryJogo(nome, preco, tipo);
 		if(!jogos.contains(jogo)){
-			if(getSaldo() >= jogo.getPreco()){
+			double valorJogo = jogo.getPreco() * descontoNoob;
+			if(getSaldo() >= valorJogo){
 				jogos.add(jogo);
-				compraJogo(jogo.getPreco() * descontoNoob);
+				compraJogo(valorJogo);
 				double precoInteiro = jogo.getPreco() - (jogo.getPreco() % 1);
 				x2p += precoInteiro * x2pPorReal;
 				return true;

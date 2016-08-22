@@ -12,11 +12,11 @@ public class Plataforma extends Jogo {
 		int x2pPlataforma = 20;
 		int jogadaSemX2p = 0;
 		setQntJogadas();
-		if (score > getMaiorScore()){
-			setMaiorScore(score);			
+		if(score > getMaiorScore()){
+			setMaiorScore(score);
 		}
-		if (zerou){
-			setQntJogadas();
+		if(zerou){
+			setQntConclusoes();
 			return x2pPlataforma;
 		} return jogadaSemX2p;
 	}

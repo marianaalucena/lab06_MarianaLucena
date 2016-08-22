@@ -11,13 +11,20 @@ public abstract class Jogo {
 	protected HashSet<Jogabilidade> jogabilidade;
 	protected String tipo = null;
 	
+	
+	/**
+	 * Construtor da classe jogo
+	 * @param nome: nome do jogo
+	 * @param preco: preço do jogo
+	 * @throws Exception: lança exceção quando o nome do jogo é nulo ou vazio ou quando o preco for negativo.
+	 */
 	public Jogo(String nome, double preco) throws Exception {
 		if (nome == null || nome.trim().equals("")){
-			throw new Exception("Nome nao pode ser nulo ou vazio");
+			throw new Exception("Nome do jogo nao pode ser nulo ou vazio");
 		}
 		
 		if (preco < 0){
-			throw new Exception("Preco nao pode ser negativo");
+			throw new Exception("Preco do jogo nao pode ser negativo");
 		}
 		
 		this.nome = nome;
