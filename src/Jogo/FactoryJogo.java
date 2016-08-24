@@ -6,6 +6,15 @@ public class FactoryJogo {
 		
 	}
 	
+	/**
+	 * 
+	 * @param nome: nome do jogo
+	 * @param preco: preco do jogo
+	 * @param tipo: tipo do jogo
+	 * @return: retorna um jogo
+	 * @throws Exception: lanca excecao
+	 */
+	
 	public Jogo factoryJogo(String nome, double preco, String tipo) throws Exception{
 		
 		if(tipo.equalsIgnoreCase("RPG")){

@@ -15,8 +15,8 @@ public abstract class Jogo {
 	/**
 	 * Construtor da classe jogo
 	 * @param nome: nome do jogo
-	 * @param preco: preço do jogo
-	 * @throws Exception: lança exceção quando o nome do jogo é nulo ou vazio ou quando o preco for negativo.
+	 * @param preco: preco do jogo
+	 * @throws Exception: lança excecao quando o nome do jogo eh nulo ou vazio ou quando o preco for negativo.
 	 */
 	public Jogo(String nome, double preco) throws Exception {
 		if (nome == null || nome.trim().equals("")){
@@ -36,6 +36,11 @@ public abstract class Jogo {
 	}
 	
 	public abstract int registraJogadas(int score, boolean zerou);
+	
+	/**
+	 * Adiciona uma nova jogabilidade ao jogo
+	 * @param jogabilidade
+	 */
 	
 	public void addJogabilidade(Jogabilidade jogabilidade){
 		this.jogabilidade.add(jogabilidade);
@@ -128,37 +133,12 @@ public abstract class Jogo {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Jogo other = (Jogo) obj;
-		if (jogabilidade == null) {
-			if (other.jogabilidade != null)
-				return false;
-		} else if (!jogabilidade.equals(other.jogabilidade))
-			return false;
-		if (maiorScore != other.maiorScore)
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (Double.doubleToLongBits(preco) != Double.doubleToLongBits(other.preco))
-			return false;
-		if (qntConclusoes != other.qntConclusoes)
-			return false;
-		if (qntJogadas != other.qntJogadas)
-			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
-			return false;
-		return true;
+		if (obj instanceof Jogo) {
+			Jogo outroObj = (Jogo) obj;
+			if (outroObj.getNome().equalsIgnoreCase(nome) && outroObj.getJogabilidade().equals(jogabilidade)) {
+				return true;
+			}
+		}
+		return false;
 	}
-
 }

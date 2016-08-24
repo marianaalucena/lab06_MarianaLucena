@@ -1,6 +1,7 @@
 package Testes;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +41,7 @@ public class TesteUsuario {
 		Jogo Pokemon = new RPG("Pokemon", 12.0);
 		igor.addDinheiro(1000.0);
 		igor.compraJogos(Pokemon);
-		assertEquals(997.6, igor.getSaldo(), 0.05);
+		assertEquals(990.4, igor.getSaldo(), 0.05);
 		igor.registraJogada("Pokemon", 200, false);
 		assertEquals(1190, igor.getX2p());
 		
@@ -56,6 +57,67 @@ public class TesteUsuario {
 		mariana.compraJogos(GTA);
 		mariana.registraJogada("Grand Theft Auto", 5720, false);
 		assertEquals(5, mariana.getX2p());
+		
+	}
+	
+	@Test
+	public void testConstrutorWithException() {
+		try {
+
+			Usuario usuario = new Noob("  ", "BenardiMonitor");
+			fail("Lancamento de Exception com nome do usuario vazio");
+
+		} catch (Exception e) {
+
+			assertEquals("Nome nao pode ser nulo ou vazio", e.getMessage());
+
+		}
+		
+		try {
+
+			Usuario usuario = new Noob(null, "BenardiMonitor");
+			fail("Lancamento de Exception com nome do usuario igual a null");
+
+		} catch (Exception e) {
+
+			assertEquals("Nome nao pode ser nulo ou vazio", e.getMessage());
+
+		}
+
+		try {
+
+			Usuario usuario = new Veterano("Benardi", " ");
+			fail("Lancamento de Exception com login do usuario vazio");
+
+		} catch (Exception e) {
+
+			assertEquals("Username nao pode ser nulo ou vazio", e.getMessage());
+
+		}
+		
+		try {
+
+			Usuario usuario = new Veterano("Benardi", null);
+			fail("Lancamento de Exception com login do usuario igual a null");
+
+		} catch (Exception e) {
+
+			assertEquals("Username nao pode ser nulo ou vazio", e.getMessage());
+
+		}
+		
+		try {
+
+			Usuario usuario = new Veterano("Benardi", "benardi");
+			usuario.setSaldo(-10.5);
+			fail("Lancamento de Exception quando o usuario tentar adicionar um valor negativo");
+
+		} catch (Exception e) {
+
+			assertEquals("Valor negativo nao eh permitido", e.getMessage());
+
+		}
+		
 		
 	}
 	

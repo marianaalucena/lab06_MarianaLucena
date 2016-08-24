@@ -12,8 +12,15 @@ public abstract class Usuario {
 	protected int x2p;
 	protected HashSet<Jogo> jogos;
 	protected FactoryJogo factoryJogo;
-	protected String tipo = null;
+	protected String tipo;
 	protected final String QUEBRA_LINHA = System.lineSeparator();
+	
+	/**
+	 * Construtor da classe usuario
+	 * @param nome: nome do usuario
+	 * @param username: login do usuario
+	 * @throws Exception: lanca excecao quando o nome ou o username do usuario forem nulos ou vazios.
+	 */
 
 	public Usuario(String nome, String username) throws Exception {
 		if (nome == null || nome.trim().equals("")) {
@@ -23,10 +30,11 @@ public abstract class Usuario {
 		if (username == null || username.trim().equals("")) {
 			throw new Exception("Username nao pode ser nulo ou vazio");
 		}
-
+		
+		
 		this.nome = nome;
 		this.username = username;
-		this.jogos = new HashSet<>();
+		this.jogos = new HashSet<Jogo>();
 		
 	}
 
@@ -41,6 +49,14 @@ public abstract class Usuario {
 		setSaldo(valor);
 	}
 	
+	/**
+	 * Registra cada jogada do usuario, seja ele noob ou veterano
+	 * @param nomeDoJogo: nome do jogo que o usuario jogou
+	 * @param score: pontuacao obtida pelo usuario
+	 * @param zerou: um booleano para saber se o usuario zerou ou nao o jogo
+	 * @return: retorna um booleano para mostrar que a jogada foi registrada
+	 */
+	
 	public boolean registraJogada(String nomeDoJogo, int score, boolean zerou){
 		for (Jogo jogo : jogos) {
 			if(nomeDoJogo.equalsIgnoreCase(jogo.getNome())){
@@ -49,6 +65,15 @@ public abstract class Usuario {
 				return true;
 			}
 		} return false;
+	}
+	
+	/**
+	 * Este metodo debita da conta do usuario o valor do jogo com o desconto
+	 * @param valorJogoComDesconto: valor do jogo com o desconto
+	 */
+
+	public void compraJogo(double valorJogoComDesconto) {
+		this.saldo -= valorJogoComDesconto;
 	}
 
 	public String getNome() {
@@ -79,10 +104,6 @@ public abstract class Usuario {
 		return saldo;
 	}
 
-	public void compraJogo(double valorJogoComDesconto) {
-		this.saldo -= valorJogoComDesconto;
-	}
-
 	public void setSaldo(double valor) throws Exception {
 		if(valor < 0){
 			throw new Exception("Valor negativo nao eh permitido");
@@ -96,17 +117,21 @@ public abstract class Usuario {
 	
 	public void setJogos(HashSet<Jogo> jogos){
 		this.jogos = jogos;
+	}	
+
+	public int getX2p() {
+		return x2p;
 	}
+
+	public void setX2p(int x2p) {
+		this.x2p = x2p;
+	}
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((jogos == null) ? 0 : jogos.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(saldo);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -121,11 +146,14 @@ public abstract class Usuario {
 		return retorno;		
 	}
 
-	public int getX2p() {
-		return x2p;
-	}
-
-	public void setX2p(int x2p) {
-		this.x2p = x2p;
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Usuario) {
+			Usuario outroObj = (Usuario) obj;
+			if (outroObj.getUsername().equals(username)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
